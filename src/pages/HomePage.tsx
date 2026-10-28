@@ -100,7 +100,7 @@ export const HomePage: React.FC = () => {
       <section className="text-center mb-8">
         <div className="relative inline-flex items-center gap-2 px-3 py-1 rounded-full bg-forest-100 text-forest-900 dark:bg-forest-950/80 dark:text-forest-300 text-xs font-semibold mb-3 border border-forest-200 dark:border-forest-800">
           <NumBadge id={9} />
-          <img src="/logo.png" alt="" className="h-4 w-4 rounded-full object-contain" aria-hidden="true" />
+          <img src="/logo.jpg" alt="" className="h-4 w-4 rounded-full object-contain" aria-hidden="true" />
           <span>Think Before You Scan</span>
         </div>
         <div className="relative">

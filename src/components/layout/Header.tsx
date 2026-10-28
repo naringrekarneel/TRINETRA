@@ -36,7 +36,7 @@ export const Header: React.FC = () => {
             >
               <div className="relative h-10 w-10 overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-slate-200 dark:ring-slate-700 flex items-center justify-center shrink-0">
                 <img
-                  src="/logo.png"
+                  src="/logo.jpg"
                   alt="Trinetra Logo"
                   className="h-full w-full object-contain p-0.5"
                 />

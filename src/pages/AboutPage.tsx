@@ -14,7 +14,7 @@ export const AboutPage: React.FC = () => {
       {/* Title */}
       <section className="text-center">
         <div className="mx-auto mb-4 h-16 w-16 overflow-hidden rounded-2xl bg-white p-1 shadow-md ring-1 ring-slate-200 dark:ring-slate-700">
-          <img src="/logo.png" alt="Trinetra Emblem" className="h-full w-full object-contain" />
+          <img src="/logo.jpg" alt="Trinetra Emblem" className="h-full w-full object-contain" />
         </div>
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-forest-100 text-forest-900 dark:bg-forest-950/80 dark:text-forest-300 text-xs font-semibold mb-3 border border-forest-200 dark:border-forest-800">
           <span>Open Source Security Project</span>

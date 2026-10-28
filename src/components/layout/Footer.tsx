@@ -34,7 +34,7 @@ export const Footer: React.FC = () => {
             <div className="flex items-center gap-2">
               <div className="relative h-8 w-8 overflow-hidden rounded-lg bg-white shadow-sm ring-1 ring-slate-200 dark:ring-slate-700 flex items-center justify-center shrink-0">
                 <img
-                  src="/logo.png"
+                  src="/logo.jpg"
                   alt="Trinetra Logo"
                   className="h-full w-full object-contain p-0.5"
                 />
