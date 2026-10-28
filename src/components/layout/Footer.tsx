@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Shield, Lock, EyeOff, FileText, Github } from "lucide-react";
+import { Eye, Lock, EyeOff, FileText, Github } from "lucide-react";
 import { NumBadge } from "../../context/ElementNumberContext";
 
 export const Footer: React.FC = () => {
@@ -32,8 +32,8 @@ export const Footer: React.FC = () => {
           <div className="relative md:col-span-2">
             <NumBadge id={48} />
             <div className="flex items-center gap-2">
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-forest-800 text-white dark:bg-forest-600">
-                <Shield className="h-4 w-4" aria-hidden="true" />
+              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-forest-800 text-white dark:bg-forest-600 shadow-sm">
+                <Eye className="h-4 w-4" aria-hidden="true" />
               </div>
               <span className="font-bold text-base text-slate-900 dark:text-white">
                 Trinetra

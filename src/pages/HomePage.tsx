@@ -10,7 +10,7 @@ import { NumBadge } from "../context/ElementNumberContext";
 import {
   Link as LinkIcon,
   QrCode,
-  ShieldCheck,
+  Eye,
   Camera,
   UploadCloud,
   CheckCircle2,
@@ -101,7 +101,7 @@ export const HomePage: React.FC = () => {
       <section className="text-center mb-8">
         <div className="relative inline-flex items-center gap-2 px-3 py-1 rounded-full bg-forest-100 text-forest-900 dark:bg-forest-950/80 dark:text-forest-300 text-xs font-semibold mb-3 border border-forest-200 dark:border-forest-800">
           <NumBadge id={9} />
-          <ShieldCheck className="h-4 w-4" aria-hidden="true" />
+          <Eye className="h-4 w-4" aria-hidden="true" />
           <span>Think Before You Scan</span>
         </div>
         <div className="relative">

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Shield, Menu, X, Sun, Moon, Github, Hash } from "lucide-react";
+import { Eye, Menu, X, Sun, Moon, Github, Hash } from "lucide-react";
 import { useTheme } from "../../hooks/useTheme";
 import { NumBadge, useElementNumbers } from "../../context/ElementNumberContext";
 
@@ -34,8 +34,8 @@ export const Header: React.FC = () => {
               className="flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-600 rounded-md p-1"
               aria-label="Trinetra Home"
             >
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-forest-800 text-white dark:bg-forest-600">
-                <Shield className="h-5 w-5" aria-hidden="true" />
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-forest-800 text-white dark:bg-forest-600 shadow-sm">
+                <Eye className="h-5 w-5" aria-hidden="true" />
               </div>
               <div>
                 <span className="text-lg font-bold tracking-tight text-slate-900 dark:text-white">
