@@ -32,8 +32,12 @@ export const Footer: React.FC = () => {
           <div className="relative">
             <NumBadge id={48} />
             <div className="flex items-center gap-2">
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-forest-800 text-white dark:bg-forest-600 shadow-sm">
-                <Eye className="h-4 w-4" aria-hidden="true" />
+              <div className="relative h-8 w-8 overflow-hidden rounded-lg bg-white shadow-sm ring-1 ring-slate-200 dark:ring-slate-700 flex items-center justify-center shrink-0">
+                <img
+                  src="/logo.png"
+                  alt="Trinetra Logo"
+                  className="h-full w-full object-contain p-0.5"
+                />
               </div>
               <span className="font-bold text-base text-slate-900 dark:text-white">
                 Trinetra

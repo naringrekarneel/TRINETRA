@@ -14,8 +14,10 @@ export const AboutPage: React.FC = () => {
     <div className="max-w-4xl mx-auto px-4 py-12 sm:px-6 lg:px-8 space-y-12">
       {/* Title */}
       <section className="text-center">
+        <div className="mx-auto mb-4 h-16 w-16 overflow-hidden rounded-2xl bg-white p-1 shadow-md ring-1 ring-slate-200 dark:ring-slate-700">
+          <img src="/logo.png" alt="Trinetra Emblem" className="h-full w-full object-contain" />
+        </div>
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-forest-100 text-forest-900 dark:bg-forest-950/80 dark:text-forest-300 text-xs font-semibold mb-3 border border-forest-200 dark:border-forest-800">
-          <Shield className="h-4 w-4" aria-hidden="true" />
           <span>Open Source Security Project</span>
         </div>
         <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">

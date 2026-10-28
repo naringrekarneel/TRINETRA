@@ -34,8 +34,12 @@ export const Header: React.FC = () => {
               className="flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-600 rounded-md p-1"
               aria-label="Trinetra Home"
             >
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-forest-800 text-white dark:bg-forest-600 shadow-sm">
-                <Eye className="h-5 w-5" aria-hidden="true" />
+              <div className="relative h-10 w-10 overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-slate-200 dark:ring-slate-700 flex items-center justify-center shrink-0">
+                <img
+                  src="/logo.png"
+                  alt="Trinetra Logo"
+                  className="h-full w-full object-contain p-0.5"
+                />
               </div>
               <div>
                 <span className="text-lg font-bold tracking-tight text-slate-900 dark:text-white">
