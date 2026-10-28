@@ -27,7 +27,7 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand Info (#48) */}
           <div className="relative md:col-span-2">
             <NumBadge id={48} />
@@ -51,48 +51,6 @@ export const Footer: React.FC = () => {
               />
               <span>Free &amp; Open Source Software (MIT License)</span>
             </div>
-          </div>
-
-          {/* Quick Navigation (#49) */}
-          <div className="relative">
-            <NumBadge id={49} />
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-900 dark:text-slate-200">
-              Navigation
-            </h4>
-            <ul className="mt-3 space-y-2 text-sm">
-              <li>
-                <Link
-                  to="/"
-                  className="text-slate-600 hover:text-forest-700 dark:text-slate-400 dark:hover:text-forest-400 transition-colors"
-                >
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/how-it-works"
-                  className="text-slate-600 hover:text-forest-700 dark:text-slate-400 dark:hover:text-forest-400 transition-colors"
-                >
-                  How It Works
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/security-guide"
-                  className="text-slate-600 hover:text-forest-700 dark:text-slate-400 dark:hover:text-forest-400 transition-colors"
-                >
-                  Security Guide
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/about"
-                  className="text-slate-600 hover:text-forest-700 dark:text-slate-400 dark:hover:text-forest-400 transition-colors"
-                >
-                  About &amp; Open Source
-                </Link>
-              </li>
-            </ul>
           </div>
 
           {/* Legal / Limitations (#50) */}
