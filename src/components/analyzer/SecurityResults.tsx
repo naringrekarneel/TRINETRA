@@ -3,6 +3,7 @@ import { AnalysisResult } from "../../types/security";
 import { URLDetails } from "./URLDetails";
 import { WarningCard } from "./WarningCard";
 import { Button } from "../ui/Button";
+import { NumBadge } from "../../context/ElementNumberContext";
 import {
   ShieldAlert,
   AlertTriangle,
@@ -130,26 +131,29 @@ export const SecurityResults: React.FC<SecurityResultsProps> = ({
 
   return (
     <div className="space-y-6">
-      {/* Overall Assessment Status Banner */}
-      <div
-        role="region"
-        aria-label="Security assessment outcome"
-        className={`rounded-xl border p-5 shadow-sm transition-all ${currentStatus.border} ${currentStatus.bg}`}
-      >
-        <div className="flex items-start gap-4">
-          {currentStatus.icon}
-          <div className="flex-1">
-            <div className="flex flex-wrap items-center justify-between gap-2">
-              <h3 className={`text-base font-bold ${currentStatus.text}`}>
-                {result.statusLabel}
-              </h3>
-              <span className="text-xs font-mono text-slate-500 dark:text-slate-400">
-                Inspected at {new Date(result.analyzedAt).toLocaleTimeString()}
-              </span>
+      {/* Overall Assessment Status Banner (#28) */}
+      <div className="relative">
+        <NumBadge id={28} />
+        <div
+          role="region"
+          aria-label="Security assessment outcome"
+          className={`rounded-xl border p-5 shadow-sm transition-all ${currentStatus.border} ${currentStatus.bg}`}
+        >
+          <div className="flex items-start gap-4">
+            {currentStatus.icon}
+            <div className="flex-1">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <h3 className={`text-base font-bold ${currentStatus.text}`}>
+                  {result.statusLabel}
+                </h3>
+                <span className="text-xs font-mono text-slate-500 dark:text-slate-400">
+                  Inspected at {new Date(result.analyzedAt).toLocaleTimeString()}
+                </span>
+              </div>
+              <p className="mt-1 text-sm text-slate-700 dark:text-slate-300">
+                {result.statusDescription}
+              </p>
             </div>
-            <p className="mt-1 text-sm text-slate-700 dark:text-slate-300">
-              {result.statusDescription}
-            </p>
           </div>
         </div>
       </div>
@@ -256,10 +260,11 @@ export const SecurityResults: React.FC<SecurityResultsProps> = ({
         <URLDetails details={result.parsedDetails} />
       )}
 
-      {/* Findings List */}
+      {/* Findings List (#37, #38) */}
       {result.findings.length > 0 ? (
-        <div className="space-y-3">
-          <div className="flex items-center justify-between">
+        <div className="space-y-3 relative">
+          <div className="relative flex items-center justify-between">
+            <NumBadge id={37} />
             <h4 className="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
               Heuristic Security Findings ({result.findings.length})
             </h4>
@@ -268,7 +273,8 @@ export const SecurityResults: React.FC<SecurityResultsProps> = ({
             </span>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-3 relative">
+            <NumBadge id={38} />
             {result.findings.map((finding) => (
               <WarningCard key={finding.id} finding={finding} />
             ))}
@@ -296,8 +302,9 @@ export const SecurityResults: React.FC<SecurityResultsProps> = ({
         )
       )}
 
-      {/* Analysis Limitations Notice */}
-      <div className="rounded-xl border border-slate-200 bg-slate-50/70 p-4 dark:border-slate-800 dark:bg-charcoal-950 text-xs text-slate-600 dark:text-slate-400 space-y-2">
+      {/* Analysis Limitations Notice (#39) */}
+      <div className="relative rounded-xl border border-slate-200 bg-slate-50/70 p-4 dark:border-slate-800 dark:bg-charcoal-950 text-xs text-slate-600 dark:text-slate-400 space-y-2">
+        <NumBadge id={39} />
         <div className="flex items-center gap-1.5 font-semibold text-slate-700 dark:text-slate-300">
           <Info
             className="h-4 w-4 shrink-0 text-slate-500"
@@ -312,52 +319,61 @@ export const SecurityResults: React.FC<SecurityResultsProps> = ({
         </ul>
       </div>
 
-      {/* Action Buttons Bar */}
+      {/* Action Buttons Bar (#40, #41, #42) */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
-        <Button
-          variant="outline"
-          size="md"
-          onClick={onReset}
-          className="w-full sm:w-auto"
-        >
-          <RotateCcw className="h-4 w-4 mr-1.5" aria-hidden="true" />
-          Scan or Check Another Link
-        </Button>
+        <div className="relative w-full sm:w-auto">
+          <NumBadge id={40} />
+          <Button
+            variant="outline"
+            size="md"
+            onClick={onReset}
+            className="w-full sm:w-auto"
+          >
+            <RotateCcw className="h-4 w-4 mr-1.5" aria-hidden="true" />
+            Scan or Check Another Link
+          </Button>
+        </div>
 
         <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
-          <Button
-            variant="secondary"
-            size="md"
-            onClick={handleCopyUrl}
-            className="flex-1 sm:flex-initial"
-            aria-label="Copy inspected URL to clipboard"
-          >
-            {copied ? (
-              <>
-                <Check
-                  className="h-4 w-4 mr-1.5 text-forest-600"
-                  aria-hidden="true"
-                />
-                <span>Copied!</span>
-              </>
-            ) : (
-              <>
-                <Copy className="h-4 w-4 mr-1.5" aria-hidden="true" />
-                <span>Copy URL</span>
-              </>
-            )}
-          </Button>
+          <div className="relative flex-1 sm:flex-initial">
+            <NumBadge id={41} />
+            <Button
+              variant="secondary"
+              size="md"
+              onClick={handleCopyUrl}
+              className="w-full sm:w-auto"
+              aria-label="Copy inspected URL to clipboard"
+            >
+              {copied ? (
+                <>
+                  <Check
+                    className="h-4 w-4 mr-1.5 text-forest-600"
+                    aria-hidden="true"
+                  />
+                  <span>Copied!</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="h-4 w-4 mr-1.5" aria-hidden="true" />
+                  <span>Copy URL</span>
+                </>
+              )}
+            </Button>
+          </div>
 
           {result.isWebUrl && result.normalizedUrl && (
-            <Button
-              variant={hasHighRisk ? "danger" : "primary"}
-              size="md"
-              onClick={handleContinueClick}
-              className="flex-1 sm:flex-initial"
-            >
-              <span>Continue to Website</span>
-              <ExternalLink className="h-4 w-4 ml-1.5" aria-hidden="true" />
-            </Button>
+            <div className="relative flex-1 sm:flex-initial">
+              <NumBadge id={42} />
+              <Button
+                variant={hasHighRisk ? "danger" : "primary"}
+                size="md"
+                onClick={handleContinueClick}
+                className="w-full sm:w-auto"
+              >
+                <span>Continue to Website</span>
+                <ExternalLink className="h-4 w-4 ml-1.5" aria-hidden="true" />
+              </Button>
+            </div>
           )}
         </div>
       </div>

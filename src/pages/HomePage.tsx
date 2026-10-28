@@ -6,6 +6,7 @@ import { SecurityResults } from "../components/analyzer/SecurityResults";
 import { analyzeURL } from "../lib/analyze-url";
 import { classifyQRContent } from "../lib/analyze-text";
 import { AnalysisResult } from "../types/security";
+import { NumBadge } from "../context/ElementNumberContext";
 import {
   Link as LinkIcon,
   QrCode,
@@ -24,7 +25,7 @@ export const HomePage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<TabMode>("link");
   const [qrSubMode, setQrSubMode] = useState<QRSubMode>("camera");
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(
-    null,
+    null
   );
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
@@ -96,19 +97,26 @@ export const HomePage: React.FC = () => {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
-      {/* Hero Section */}
+      {/* Hero Section (#9, #10, #11) */}
       <section className="text-center mb-8">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-forest-100 text-forest-900 dark:bg-forest-950/80 dark:text-forest-300 text-xs font-semibold mb-3 border border-forest-200 dark:border-forest-800">
+        <div className="relative inline-flex items-center gap-2 px-3 py-1 rounded-full bg-forest-100 text-forest-900 dark:bg-forest-950/80 dark:text-forest-300 text-xs font-semibold mb-3 border border-forest-200 dark:border-forest-800">
+          <NumBadge id={9} />
           <ShieldCheck className="h-4 w-4" aria-hidden="true" />
           <span>Think Before You Scan</span>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-          Check before you trust.
-        </h1>
-        <p className="mt-2 text-base text-slate-600 dark:text-slate-300 max-w-xl mx-auto">
-          Inspect links and QR codes for suspicious patterns before visiting a
-          website. Zero server uploads, completely client-side.
-        </p>
+        <div className="relative">
+          <NumBadge id={10} />
+          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+            Check before you trust.
+          </h1>
+        </div>
+        <div className="relative mt-2">
+          <NumBadge id={11} />
+          <p className="text-base text-slate-600 dark:text-slate-300 max-w-xl mx-auto">
+            Inspect links and QR codes for suspicious patterns before visiting a
+            website. Zero server uploads, completely client-side.
+          </p>
+        </div>
       </section>
 
       {/* Main Inspection Card */}
@@ -117,43 +125,49 @@ export const HomePage: React.FC = () => {
           <SecurityResults result={analysisResult} onReset={handleReset} />
         ) : (
           <div>
-            {/* Primary Mode Tabs */}
+            {/* Primary Mode Tabs (#12, #13) */}
             <div
               role="tablist"
               aria-label="Inspection method"
               className="grid grid-cols-2 p-1.5 rounded-xl bg-slate-100 dark:bg-charcoal-950 mb-6"
             >
-              <button
-                role="tab"
-                id="tab-link"
-                aria-selected={activeTab === "link"}
-                aria-controls="panel-link"
-                onClick={() => setActiveTab("link")}
-                className={`flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-semibold text-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-600 ${
-                  activeTab === "link"
-                    ? "bg-white text-forest-900 shadow-sm dark:bg-charcoal-900 dark:text-white"
-                    : "text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-                }`}
-              >
-                <LinkIcon className="h-4 w-4" aria-hidden="true" />
-                <span>Check a Link</span>
-              </button>
+              <div className="relative">
+                <NumBadge id={12} />
+                <button
+                  role="tab"
+                  id="tab-link"
+                  aria-selected={activeTab === "link"}
+                  aria-controls="panel-link"
+                  onClick={() => setActiveTab("link")}
+                  className={`w-full flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-semibold text-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-600 ${
+                    activeTab === "link"
+                      ? "bg-white text-forest-900 shadow-sm dark:bg-charcoal-900 dark:text-white"
+                      : "text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
+                  }`}
+                >
+                  <LinkIcon className="h-4 w-4" aria-hidden="true" />
+                  <span>Check a Link</span>
+                </button>
+              </div>
 
-              <button
-                role="tab"
-                id="tab-qr"
-                aria-selected={activeTab === "qr"}
-                aria-controls="panel-qr"
-                onClick={() => setActiveTab("qr")}
-                className={`flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-semibold text-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-600 ${
-                  activeTab === "qr"
-                    ? "bg-white text-forest-900 shadow-sm dark:bg-charcoal-900 dark:text-white"
-                    : "text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-                }`}
-              >
-                <QrCode className="h-4 w-4" aria-hidden="true" />
-                <span>Scan a QR Code</span>
-              </button>
+              <div className="relative">
+                <NumBadge id={13} />
+                <button
+                  role="tab"
+                  id="tab-qr"
+                  aria-selected={activeTab === "qr"}
+                  aria-controls="panel-qr"
+                  onClick={() => setActiveTab("qr")}
+                  className={`w-full flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-semibold text-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-600 ${
+                    activeTab === "qr"
+                      ? "bg-white text-forest-900 shadow-sm dark:bg-charcoal-900 dark:text-white"
+                      : "text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
+                  }`}
+                >
+                  <QrCode className="h-4 w-4" aria-hidden="true" />
+                  <span>Scan a QR Code</span>
+                </button>
+              </div>
             </div>
 
             {/* Link Checker Panel */}
@@ -179,33 +193,39 @@ export const HomePage: React.FC = () => {
                 aria-labelledby="tab-qr"
                 className="animate-fade-in space-y-4"
               >
-                {/* Secondary QR mode selector (Camera vs Upload) */}
+                {/* Secondary QR mode selector (Camera vs Upload) (#20, #21) */}
                 <div className="flex items-center justify-center gap-2 pb-2">
-                  <button
-                    type="button"
-                    onClick={() => setQrSubMode("camera")}
-                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
-                      qrSubMode === "camera"
-                        ? "bg-forest-50 border-forest-600 text-forest-900 dark:bg-forest-950/60 dark:border-forest-500 dark:text-forest-200"
-                        : "border-slate-200 text-slate-600 hover:bg-slate-50 dark:border-slate-800 dark:text-slate-400 dark:hover:bg-charcoal-800"
-                    }`}
-                  >
-                    <Camera className="h-3.5 w-3.5" aria-hidden="true" />
-                    <span>Live Camera</span>
-                  </button>
+                  <div className="relative">
+                    <NumBadge id={20} />
+                    <button
+                      type="button"
+                      onClick={() => setQrSubMode("camera")}
+                      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
+                        qrSubMode === "camera"
+                          ? "bg-forest-50 border-forest-600 text-forest-900 dark:bg-forest-950/60 dark:border-forest-500 dark:text-forest-200"
+                          : "border-slate-200 text-slate-600 hover:bg-slate-50 dark:border-slate-800 dark:text-slate-400 dark:hover:bg-charcoal-800"
+                      }`}
+                    >
+                      <Camera className="h-3.5 w-3.5" aria-hidden="true" />
+                      <span>Live Camera</span>
+                    </button>
+                  </div>
 
-                  <button
-                    type="button"
-                    onClick={() => setQrSubMode("upload")}
-                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
-                      qrSubMode === "upload"
-                        ? "bg-forest-50 border-forest-600 text-forest-900 dark:bg-forest-950/60 dark:border-forest-500 dark:text-forest-200"
-                        : "border-slate-200 text-slate-600 hover:bg-slate-50 dark:border-slate-800 dark:text-slate-400 dark:hover:bg-charcoal-800"
-                    }`}
-                  >
-                    <UploadCloud className="h-3.5 w-3.5" aria-hidden="true" />
-                    <span>Upload Image</span>
-                  </button>
+                  <div className="relative">
+                    <NumBadge id={21} />
+                    <button
+                      type="button"
+                      onClick={() => setQrSubMode("upload")}
+                      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
+                        qrSubMode === "upload"
+                          ? "bg-forest-50 border-forest-600 text-forest-900 dark:bg-forest-950/60 dark:border-forest-500 dark:text-forest-200"
+                          : "border-slate-200 text-slate-600 hover:bg-slate-50 dark:border-slate-800 dark:text-slate-400 dark:hover:bg-charcoal-800"
+                      }`}
+                    >
+                      <UploadCloud className="h-3.5 w-3.5" aria-hidden="true" />
+                      <span>Upload Image</span>
+                    </button>
+                  </div>
                 </div>
 
                 {qrSubMode === "camera" ? (
@@ -225,14 +245,18 @@ export const HomePage: React.FC = () => {
         )}
       </div>
 
-      {/* Primary Use Cases Grid */}
-      <section className="mt-12">
-        <h2 className="text-center text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-6">
-          Everyday QR Scenarios Where Caution is Essential
-        </h2>
+      {/* Primary Use Cases Grid (#43, #44, #45, #46) */}
+      <section className="mt-12 relative">
+        <div className="relative mb-6">
+          <NumBadge id={43} />
+          <h2 className="text-center text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+            Everyday QR Scenarios Where Caution is Essential
+          </h2>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-charcoal-900">
+          <div className="relative rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-charcoal-900">
+            <NumBadge id={44} />
             <div className="flex items-center gap-2 font-semibold text-sm text-slate-900 dark:text-white mb-1">
               <AlertTriangle
                 className="h-4 w-4 text-amber-600 dark:text-amber-400"
@@ -246,7 +270,8 @@ export const HomePage: React.FC = () => {
             </p>
           </div>
 
-          <div className="rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-charcoal-900">
+          <div className="relative rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-charcoal-900">
+            <NumBadge id={45} />
             <div className="flex items-center gap-2 font-semibold text-sm text-slate-900 dark:text-white mb-1">
               <CheckCircle2
                 className="h-4 w-4 text-forest-700 dark:text-forest-400"
@@ -260,7 +285,8 @@ export const HomePage: React.FC = () => {
             </p>
           </div>
 
-          <div className="rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-charcoal-900">
+          <div className="relative rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-charcoal-900">
+            <NumBadge id={46} />
             <div className="flex items-center gap-2 font-semibold text-sm text-slate-900 dark:text-white mb-1">
               <HelpCircle
                 className="h-4 w-4 text-sky-600 dark:text-sky-400"

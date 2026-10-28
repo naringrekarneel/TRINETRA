@@ -9,6 +9,7 @@ import {
 import { Button } from "../ui/Button";
 import { useQRScanner } from "../../hooks/useQRScanner";
 import { CameraPermissionStateView } from "./CameraPermissionState";
+import { NumBadge } from "../../context/ElementNumberContext";
 
 interface QRScannerProps {
   onScanSuccess: (decodedText: string) => void;
@@ -48,8 +49,9 @@ export const QRScanner: React.FC<QRScannerProps> = ({
 
   return (
     <div className="space-y-4">
-      {/* Privacy reminder */}
-      <div className="flex items-center gap-2 text-xs text-forest-800 bg-forest-50 p-2.5 rounded-lg border border-forest-200 dark:bg-forest-950/40 dark:text-forest-300 dark:border-forest-900">
+      {/* Privacy reminder (#22) */}
+      <div className="relative flex items-center gap-2 text-xs text-forest-800 bg-forest-50 p-2.5 rounded-lg border border-forest-200 dark:bg-forest-950/40 dark:text-forest-300 dark:border-forest-900">
+        <NumBadge id={22} />
         <ShieldCheck
           className="h-4 w-4 shrink-0 text-forest-700 dark:text-forest-400"
           aria-hidden="true"
@@ -70,8 +72,9 @@ export const QRScanner: React.FC<QRScannerProps> = ({
         />
       )}
 
-      {/* Camera Viewport Container */}
+      {/* Camera Viewport Container (#23) */}
       <div className="relative mx-auto max-w-sm sm:max-w-md overflow-hidden rounded-xl border border-slate-300 bg-slate-900 shadow-inner dark:border-slate-800 min-h-[300px] flex flex-col items-center justify-center text-white">
+        <NumBadge id={23} />
         {/* Render container for Html5Qrcode */}
         <div
           id={SCANNER_ELEMENT_ID}
@@ -97,7 +100,7 @@ export const QRScanner: React.FC<QRScannerProps> = ({
           </div>
         )}
 
-        {/* Idle Placeholder when camera not active */}
+        {/* Idle Placeholder when camera not active (#24) */}
         {!isScanning && permissionState !== "requesting" && (
           <div className="p-8 text-center flex flex-col items-center">
             <div className="h-16 w-16 rounded-2xl bg-slate-800 border border-slate-700 flex items-center justify-center text-forest-400 shadow-sm mb-4">
@@ -110,15 +113,18 @@ export const QRScanner: React.FC<QRScannerProps> = ({
               Click &quot;Start Scanner&quot; to inspect a QR code using your
               device camera.
             </p>
-            <Button
-              variant="primary"
-              size="md"
-              onClick={handleStart}
-              className="mt-5 w-full sm:w-auto"
-            >
-              <Camera className="h-4 w-4 mr-2" aria-hidden="true" />
-              Start Scanner
-            </Button>
+            <div className="relative mt-5">
+              <NumBadge id={24} />
+              <Button
+                variant="primary"
+                size="md"
+                onClick={handleStart}
+                className="w-full sm:w-auto"
+              >
+                <Camera className="h-4 w-4 mr-2" aria-hidden="true" />
+                Start Scanner
+              </Button>
+            </div>
           </div>
         )}
 
@@ -130,39 +136,48 @@ export const QRScanner: React.FC<QRScannerProps> = ({
         </div>
       </div>
 
-      {/* Scanner Action Controls */}
+      {/* Scanner Action Controls (#25, #26) */}
       <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
         {isScanning ? (
-          <Button
-            variant="danger"
-            size="sm"
-            onClick={handleStop}
-            className="w-full sm:w-auto"
-          >
-            <Square className="h-4 w-4 mr-1.5" aria-hidden="true" />
-            Stop Camera
-          </Button>
+          <div className="relative">
+            <NumBadge id={25} />
+            <Button
+              variant="danger"
+              size="sm"
+              onClick={handleStop}
+              className="w-full sm:w-auto"
+            >
+              <Square className="h-4 w-4 mr-1.5" aria-hidden="true" />
+              Stop Camera
+            </Button>
+          </div>
         ) : (
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={handleStart}
-            className="w-full sm:w-auto"
-          >
-            <RefreshCw className="h-4 w-4 mr-1.5" aria-hidden="true" />
-            Restart Camera
-          </Button>
+          <div className="relative">
+            <NumBadge id={24} />
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleStart}
+              className="w-full sm:w-auto"
+            >
+              <RefreshCw className="h-4 w-4 mr-1.5" aria-hidden="true" />
+              Restart Camera
+            </Button>
+          </div>
         )}
 
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={onSwitchToUpload}
-          className="w-full sm:w-auto text-slate-600 dark:text-slate-300"
-        >
-          <UploadCloud className="h-4 w-4 mr-1.5" aria-hidden="true" />
-          Switch to Image Upload
-        </Button>
+        <div className="relative">
+          <NumBadge id={26} />
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={onSwitchToUpload}
+            className="w-full sm:w-auto text-slate-600 dark:text-slate-300"
+          >
+            <UploadCloud className="h-4 w-4 mr-1.5" aria-hidden="true" />
+            Switch to Image Upload
+          </Button>
+        </div>
       </div>
     </div>
   );

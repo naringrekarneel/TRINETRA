@@ -9,6 +9,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { Button } from "../ui/Button";
+import { NumBadge } from "../../context/ElementNumberContext";
 
 interface QRImageUploadProps {
   onScanSuccess: (decodedText: string) => void;
@@ -144,86 +145,89 @@ export const QRImageUpload: React.FC<QRImageUploadProps> = ({
         </span>
       </div>
 
-      {/* Upload Dropzone */}
-      <div
-        onDrop={handleDrop}
-        onDragOver={handleDragOver}
-        onDragLeave={handleDragLeave}
-        onClick={() => !isDecoding && fileInputRef.current?.click()}
-        className={`relative flex flex-col items-center justify-center p-8 rounded-xl border-2 border-dashed transition-all cursor-pointer ${
-          isDragging
-            ? "border-forest-600 bg-forest-50/50 dark:border-forest-400 dark:bg-forest-950/20"
-            : "border-slate-300 bg-white hover:border-slate-400 hover:bg-slate-50 dark:border-slate-700 dark:bg-charcoal-900 dark:hover:border-slate-600 dark:hover:bg-charcoal-800"
-        }`}
-        role="button"
-        tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            fileInputRef.current?.click();
-          }
-        }}
-        aria-label="Upload QR code image"
-      >
-        <input
-          ref={fileInputRef}
-          type="file"
-          accept="image/png,image/jpeg,image/jpg,image/webp,image/svg+xml"
-          className="hidden"
-          onChange={handleFileInputChange}
-          aria-hidden="true"
-        />
+      {/* Upload Dropzone (#27) */}
+      <div className="relative">
+        <NumBadge id={27} />
+        <div
+          onDrop={handleDrop}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onClick={() => !isDecoding && fileInputRef.current?.click()}
+          className={`relative flex flex-col items-center justify-center p-8 rounded-xl border-2 border-dashed transition-all cursor-pointer ${
+            isDragging
+              ? "border-forest-600 bg-forest-50/50 dark:border-forest-400 dark:bg-forest-950/20"
+              : "border-slate-300 bg-white hover:border-slate-400 hover:bg-slate-50 dark:border-slate-700 dark:bg-charcoal-900 dark:hover:border-slate-600 dark:hover:bg-charcoal-800"
+          }`}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              fileInputRef.current?.click();
+            }
+          }}
+          aria-label="Upload QR code image"
+        >
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/png,image/jpeg,image/jpg,image/webp,image/svg+xml"
+            className="hidden"
+            onChange={handleFileInputChange}
+            aria-hidden="true"
+          />
 
-        {imagePreview ? (
-          <div className="flex flex-col items-center text-center">
-            <div className="relative mb-3">
-              <img
-                src={imagePreview}
-                alt="Uploaded QR Preview"
-                className="max-h-48 max-w-full rounded-lg object-contain shadow-sm border border-slate-200 dark:border-slate-700"
-              />
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  clearSelection();
-                }}
-                className="absolute -top-2 -right-2 p-1 rounded-full bg-slate-900 text-white hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-forest-600"
-                aria-label="Remove uploaded image"
-              >
-                <X className="h-4 w-4" aria-hidden="true" />
-              </button>
-            </div>
-            {isDecoding ? (
-              <div className="flex items-center gap-2 text-sm font-medium text-forest-700 dark:text-forest-400">
-                <RefreshCw
-                  className="h-4 w-4 animate-spin"
-                  aria-hidden="true"
+          {imagePreview ? (
+            <div className="flex flex-col items-center text-center">
+              <div className="relative mb-3">
+                <img
+                  src={imagePreview}
+                  alt="Uploaded QR Preview"
+                  className="max-h-48 max-w-full rounded-lg object-contain shadow-sm border border-slate-200 dark:border-slate-700"
                 />
-                <span>Decoding QR Code in browser...</span>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    clearSelection();
+                  }}
+                  className="absolute -top-2 -right-2 p-1 rounded-full bg-slate-900 text-white hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-forest-600"
+                  aria-label="Remove uploaded image"
+                >
+                  <X className="h-4 w-4" aria-hidden="true" />
+                </button>
               </div>
-            ) : (
-              <span className="text-xs text-slate-500 dark:text-slate-400">
-                Click or drop another image to replace
-              </span>
-            )}
-          </div>
-        ) : (
-          <div className="flex flex-col items-center text-center">
-            <div className="h-12 w-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 dark:bg-charcoal-800 dark:text-slate-300 mb-3">
-              <UploadCloud className="h-6 w-6" aria-hidden="true" />
+              {isDecoding ? (
+                <div className="flex items-center gap-2 text-sm font-medium text-forest-700 dark:text-forest-400">
+                  <RefreshCw
+                    className="h-4 w-4 animate-spin"
+                    aria-hidden="true"
+                  />
+                  <span>Decoding QR Code in browser...</span>
+                </div>
+              ) : (
+                <span className="text-xs text-slate-500 dark:text-slate-400">
+                  Click or drop another image to replace
+                </span>
+              )}
             </div>
-            <p className="text-sm font-semibold text-slate-900 dark:text-white">
-              <span className="text-forest-700 dark:text-forest-400 underline">
-                Choose a file
-              </span>{" "}
-              or drag and drop here
-            </p>
-            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-              Supported formats: PNG, JPG, JPEG, WEBP, SVG (up to 10 MB)
-            </p>
-          </div>
-        )}
+          ) : (
+            <div className="flex flex-col items-center text-center">
+              <div className="h-12 w-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 dark:bg-charcoal-800 dark:text-slate-300 mb-3">
+                <UploadCloud className="h-6 w-6" aria-hidden="true" />
+              </div>
+              <p className="text-sm font-semibold text-slate-900 dark:text-white">
+                <span className="text-forest-700 dark:text-forest-400 underline">
+                  Choose a file
+                </span>{" "}
+                or drag and drop here
+              </p>
+              <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                Supported formats: PNG, JPG, JPEG, WEBP, SVG (up to 10 MB)
+              </p>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Error message */}
@@ -256,17 +260,20 @@ export const QRImageUpload: React.FC<QRImageUploadProps> = ({
         </div>
       )}
 
-      {/* Switch to camera control */}
+      {/* Switch to camera control (#26) */}
       <div className="flex items-center justify-end pt-1">
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={onSwitchToCamera}
-          className="text-slate-600 dark:text-slate-300"
-        >
-          <ImageIcon className="h-4 w-4 mr-1.5" aria-hidden="true" />
-          Switch to Live Camera
-        </Button>
+        <div className="relative">
+          <NumBadge id={26} />
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={onSwitchToCamera}
+            className="text-slate-600 dark:text-slate-300"
+          >
+            <ImageIcon className="h-4 w-4 mr-1.5" aria-hidden="true" />
+            Switch to Live Camera
+          </Button>
+        </div>
       </div>
     </div>
   );
