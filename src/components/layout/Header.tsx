@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Eye, Menu, X, Sun, Moon, Github, Hash } from "lucide-react";
+import { Menu, X, Sun, Moon, Github, Hash } from "lucide-react";
 import { useTheme } from "../../hooks/useTheme";
 import { NumBadge, useElementNumbers } from "../../context/ElementNumberContext";
 

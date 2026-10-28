@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Eye, Lock, EyeOff, FileText, Github, CheckCircle2, ShieldCheck } from "lucide-react";
+import { Lock, EyeOff, FileText, Github, CheckCircle2, ShieldCheck } from "lucide-react";
 import { NumBadge } from "../../context/ElementNumberContext";
 
 export const Footer: React.FC = () => {

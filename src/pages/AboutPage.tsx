@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Shield,
   Github,
   FileCode,
   CheckCircle2,

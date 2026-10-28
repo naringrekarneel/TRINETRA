@@ -10,7 +10,6 @@ import { NumBadge } from "../context/ElementNumberContext";
 import {
   Link as LinkIcon,
   QrCode,
-  Eye,
   Camera,
   UploadCloud,
   CheckCircle2,
