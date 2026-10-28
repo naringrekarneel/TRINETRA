@@ -282,13 +282,29 @@ export const checkMisleadingBrandPlacement: SecurityRule = (ctx) => {
       pathFirstSegment,
     );
 
-    if (inSubdomain || inPath) {
+    // Check if brand appears as a delimited token in the domain name itself (combosquatting)
+    // e.g. "signin-ebay-accounts-review" contains "ebay" but the registrable domain is not legitimate ebay
+    const inDomainLabel =
+      registrableBase !== brand &&
+      new RegExp(`(^|[-_])${brand}([-_]|$)`, "i").test(registrableBase);
+
+    if (inSubdomain || inPath || inDomainLabel) {
+      const locationText = inDomainLabel
+        ? "domain name (combosquatting)"
+        : inSubdomain
+        ? "subdomain"
+        : "path";
+
       return {
         id: "rule-misleading-brand-placement",
         severity: "high",
-        title: `Deceptive Brand Keyword (${brand}) Outside Main Domain`,
-        description: `The known brand "${brand}" appears in the ${inSubdomain ? "subdomain" : "path"}, but the actual registered destination domain is "${ctx.domain}". This is a very common brand-impersonation technique.`,
-        evidence: `Brand: "${brand}" located in ${inSubdomain ? "subdomain" : "path"}, while registered domain is "${ctx.domain}"`,
+        title: inDomainLabel
+          ? `Deceptive Brand Keyword (${brand}) in Registered Domain Name`
+          : `Deceptive Brand Keyword (${brand}) Outside Main Domain`,
+        description: inDomainLabel
+          ? `The registered domain "${ctx.domain}" incorporates the well-known brand "${brand}" alongside other words. Attackers frequently register brand-combo domains to impersonate legitimate services and lure victims into credential theft.`
+          : `The known brand "${brand}" appears in the ${locationText}, but the actual registered destination domain is "${ctx.domain}". This is a very common brand-impersonation technique.`,
+        evidence: `Brand: "${brand}" located in ${locationText}, while registered domain is "${ctx.domain}"`,
         recommendation: `Do not log in or trust this page. The site belongs to "${ctx.domain}", NOT ${brand}.`,
       };
     }
@@ -302,13 +318,12 @@ export const checkMisleadingBrandPlacement: SecurityRule = (ctx) => {
 export const checkRedirectParameters: SecurityRule = (ctx) => {
   const foundParams: string[] = [];
   ctx.url.searchParams.forEach((val, key) => {
-    if (REDIRECT_PARAM_KEYS.has(key.toLowerCase())) {
-      // Check if parameter value looks like a URL
-      if (/^https?:\/\//i.test(val) || val.includes(".")) {
-        foundParams.push(
-          `${key}=${val.length > 30 ? val.substring(0, 30) + "..." : val}`,
-        );
-      }
+    const isRedirectKey = REDIRECT_PARAM_KEYS.has(key.toLowerCase());
+    const isUrlVal = /^https?:\/\//i.test(val) || /^https?%3A%2F%2F/i.test(val);
+    if (isRedirectKey || isUrlVal || (isRedirectKey && val.includes("."))) {
+      foundParams.push(
+        `${key}=${val.length > 35 ? val.substring(0, 35) + "..." : val}`,
+      );
     }
   });
 
@@ -407,9 +422,49 @@ export const ALL_SECURITY_RULES: SecurityRule[] = [
 ];
 
 /**
+ * Helper to identify and extract any embedded HTTP/HTTPS redirect target URL.
+ */
+export function extractNestedRedirectUrl(url: URL): { param: string; targetUrl: string } | null {
+  for (const [key, val] of url.searchParams.entries()) {
+    const trimmed = val.trim();
+    if (!trimmed) continue;
+
+    // Direct HTTP or HTTPS URL in parameter value
+    if (/^https?:\/\//i.test(trimmed)) {
+      return { param: key, targetUrl: trimmed };
+    }
+
+    // URL-encoded HTTP or HTTPS URL (e.g. http%3A%2F%2F...)
+    if (/^https?%3A%2F%2F/i.test(trimmed)) {
+      try {
+        const decoded = decodeURIComponent(trimmed);
+        if (/^https?:\/\//i.test(decoded)) {
+          return { param: key, targetUrl: decoded };
+        }
+      } catch {
+        // ignore
+      }
+    }
+
+    // Known redirect parameter key with domain-like value
+    if (REDIRECT_PARAM_KEYS.has(key.toLowerCase())) {
+      try {
+        const decoded = decodeURIComponent(trimmed);
+        if (/^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\/.*)?$/.test(decoded)) {
+          return { param: key, targetUrl: "http://" + decoded };
+        }
+      } catch {
+        // ignore
+      }
+    }
+  }
+  return null;
+}
+
+/**
  * Executes all modular security analysis rules against the validated URL context.
  */
-export function analyzeURL(rawInput: string): AnalysisResult {
+export function analyzeURL(rawInput: string, depth = 0): AnalysisResult {
   const parseResult = parseAndValidateURL(rawInput);
 
   if (!parseResult.success || !parseResult.details) {
@@ -462,7 +517,7 @@ export function analyzeURL(rawInput: string): AnalysisResult {
     isIpv6: details.isIpv6,
   };
 
-  // Run all rules
+  // Run all standard rules
   const findings: Finding[] = [];
   for (const rule of ALL_SECURITY_RULES) {
     try {
@@ -472,6 +527,56 @@ export function analyzeURL(rawInput: string): AnalysisResult {
       }
     } catch {
       // Continue running remaining rules even if one fails
+    }
+  }
+
+  // Deep inspection of intermediate redirect wrappers (e.g. google.com/url?q=http://phish...)
+  let redirectTarget: AnalysisResult["redirectTarget"] = undefined;
+
+  if (depth < 2) {
+    const nested = extractNestedRedirectUrl(parsedUrlObj);
+    if (nested) {
+      try {
+        const nestedUrlObj = new URL(nested.targetUrl);
+        const isExternal =
+          nestedUrlObj.hostname.toLowerCase() !== details.hostname.toLowerCase() &&
+          !nestedUrlObj.hostname.toLowerCase().endsWith("." + domainInfo.domain.toLowerCase());
+
+        if (isExternal) {
+          // Analyze the hidden destination
+          const targetResult = analyzeURL(nested.targetUrl, depth + 1);
+
+          // Add a high-severity finding exposing the cloaked redirect
+          findings.unshift({
+            id: "rule-open-redirect-wrapper",
+            severity: "high",
+            title: `Cloaked Phishing Link via Intermediate Redirector (${details.hostname})`,
+            description: `This link routes through ${details.hostname} (via parameter "${nested.param}") to mask the real destination. Attackers frequently abuse trusted domains (like Google /url redirectors) in phishing emails so the link appears safe to victims and spam filters while forwarding to an untrusted external site.`,
+            evidence: `Intermediary Host: ${details.hostname} (param: "${nested.param}") -> True Destination: ${nested.targetUrl}`,
+            recommendation: `Do NOT trust this link because it begins with "${details.hostname}". Inspect and verify the true destination: ${nestedUrlObj.hostname}.`,
+          });
+
+          // Import findings from target destination
+          for (const tf of targetResult.findings) {
+            findings.push({
+              ...tf,
+              id: `target-${tf.id}`,
+              title: `[Destination: ${nestedUrlObj.hostname}] ${tf.title}`,
+            });
+          }
+
+          redirectTarget = {
+            targetUrl: nested.targetUrl,
+            targetHostname: nestedUrlObj.hostname,
+            targetProtocol: nestedUrlObj.protocol,
+            paramName: nested.param,
+            intermediaryHostname: details.hostname,
+            findings: targetResult.findings,
+          };
+        }
+      } catch {
+        // Ignore if nested URL is malformed
+      }
     }
   }
 
@@ -486,9 +591,12 @@ export function analyzeURL(rawInput: string): AnalysisResult {
 
   if (highCount > 0 || mediumCount >= 2) {
     status = "suspicious";
-    statusLabel = "Multiple suspicious patterns detected";
-    statusDescription =
-      "Several high-risk or suspicious indicators were detected in the URL structure. Review all findings carefully.";
+    statusLabel = redirectTarget
+      ? "Cloaked Redirect / Phishing Target Detected"
+      : "Multiple suspicious patterns detected";
+    statusDescription = redirectTarget
+      ? `This link routes through ${details.hostname} to mask an external target (${redirectTarget.targetHostname}) with suspicious security indicators.`
+      : "Several high-risk or suspicious indicators were detected in the URL structure. Review all findings carefully.";
   } else if (findings.length > 0) {
     status = "review-recommended";
     statusLabel = "Review recommended";
@@ -509,5 +617,6 @@ export function analyzeURL(rawInput: string): AnalysisResult {
     findings,
     limitations: STANDARD_ANALYSIS_LIMITATIONS,
     analyzedAt: new Date().toISOString(),
+    redirectTarget,
   };
 }

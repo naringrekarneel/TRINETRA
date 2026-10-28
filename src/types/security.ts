@@ -57,6 +57,15 @@ export interface ParsedURLDetails {
   unicodeHostname: string;
 }
 
+export interface RedirectTargetInfo {
+  targetUrl: string;
+  targetHostname: string;
+  targetProtocol: string;
+  paramName: string;
+  intermediaryHostname: string;
+  findings: Finding[];
+}
+
 export interface AnalysisResult {
   input: string;
   normalizedUrl?: string;
@@ -71,4 +80,5 @@ export interface AnalysisResult {
   limitations: string[];
   analyzedAt: string;
   qrClassification?: QRClassification;
+  redirectTarget?: RedirectTargetInfo;
 }

@@ -158,6 +158,41 @@ export const SecurityResults: React.FC<SecurityResultsProps> = ({
         </div>
       </div>
 
+      {/* Intermediate Redirect / Cloaked Destination Banner */}
+      {result.redirectTarget && (
+        <div className="rounded-xl border border-rose-300 bg-rose-50/80 p-5 shadow-sm dark:border-rose-900/60 dark:bg-rose-950/30 space-y-3">
+          <div className="flex items-start gap-3">
+            <div className="rounded-lg bg-rose-100 p-2 text-rose-800 dark:bg-rose-900/80 dark:text-rose-300 shrink-0">
+              <AlertOctagon className="h-5 w-5" aria-hidden="true" />
+            </div>
+            <div className="flex-1">
+              <h4 className="text-sm font-bold text-rose-950 dark:text-rose-200">
+                Intermediate Redirect Wrapper Detected
+              </h4>
+              <p className="mt-1 text-xs text-rose-800 dark:text-rose-300">
+                The link masks its real destination by routing through{" "}
+                <strong>{result.redirectTarget.intermediaryHostname}</strong> (via parameter{" "}
+                <code>{result.redirectTarget.paramName}</code>). Attackers exploit trusted redirectors to disguise malicious sites.
+              </p>
+            </div>
+          </div>
+
+          <div className="rounded-lg bg-white p-3.5 dark:bg-charcoal-900 border border-rose-200 dark:border-rose-900/50 space-y-1.5 text-xs">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+              <span className="font-semibold text-slate-500 dark:text-slate-400">
+                True Hidden Destination:
+              </span>
+              <span className="font-mono font-bold text-rose-700 dark:text-rose-400 break-all select-all">
+                {result.redirectTarget.targetHostname}
+              </span>
+            </div>
+            <div className="pt-1 border-t border-slate-100 dark:border-slate-800 font-mono text-slate-800 dark:text-slate-200 break-all select-all bg-slate-50 dark:bg-charcoal-950 p-2 rounded">
+              {result.redirectTarget.targetUrl}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Non-Web QR Content Display (if applicable) */}
       {qr && !qr.isWebUrl && (
         <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-charcoal-900 space-y-4">

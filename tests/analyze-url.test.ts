@@ -118,6 +118,36 @@ describe('analyze-url security rules', () => {
     expect(finding?.severity).toBe('high');
   });
 
+  it('flags intermediate open redirect / cloaked phishing links (e.g. google.com/url?q=...)', () => {
+    const phishUrl =
+      'https://www.google.com/url?q=http://signin-ebay-accounts-review.com/aw-cgi/eBayISAPI.dll?SignIn&source=gmail&ust=1792302153371000&sa=E';
+    const res = analyzeURL(phishUrl);
+
+    // Must be classified as suspicious, NOT no-warnings
+    expect(res.status).toBe('suspicious');
+    expect(res.statusLabel).toContain('Cloaked Redirect');
+
+    // Must identify redirect wrapper
+    const redirectFinding = res.findings.find((f) => f.id === 'rule-open-redirect-wrapper');
+    expect(redirectFinding).toBeDefined();
+    expect(redirectFinding?.severity).toBe('high');
+    expect(redirectFinding?.evidence).toContain('signin-ebay-accounts-review.com');
+
+    // Must inspect the true destination
+    expect(res.redirectTarget).toBeDefined();
+    expect(res.redirectTarget?.targetHostname).toBe('signin-ebay-accounts-review.com');
+    expect(res.redirectTarget?.paramName).toBe('q');
+
+    // Must flag the hidden target's security flaws (unencrypted HTTP + deceptive eBay brand)
+    const brandFinding = res.findings.find((f) => f.id.includes('rule-misleading-brand-placement'));
+    expect(brandFinding).toBeDefined();
+    expect(brandFinding?.severity).toBe('high');
+
+    const httpFinding = res.findings.find((f) => f.id.includes('rule-non-https'));
+    expect(httpFinding).toBeDefined();
+    expect(httpFinding?.severity).toBe('medium');
+  });
+
   it('returns clean "no-warnings" for standard benign domain', () => {
     const res = analyzeURL('https://example.com/');
     expect(res.findings.length).toBe(0);

@@ -39,6 +39,7 @@ export const KNOWN_URL_SHORTENERS = new Set([
 ]);
 
 export const REDIRECT_PARAM_KEYS = new Set([
+  "q", // Google Search and Gmail redirect parameter (/url?q=...)
   "redirect",
   "redirect_url",
   "redirect_uri",
@@ -54,10 +55,17 @@ export const REDIRECT_PARAM_KEYS = new Set([
   "link",
   "r",
   "u",
+  "to",
+  "continue",
   "forward",
   "goto",
   "out",
   "relay",
+  "uri",
+  "site",
+  "endpoint",
+  "ref",
+  "service",
 ]);
 
 export const BRAND_TARGETS = [
@@ -71,6 +79,7 @@ export const BRAND_TARGETS = [
   "instagram",
   "whatsapp",
   "twitter",
+  "ebay",
   "chase",
   "wellsfargo",
   "bankofamerica",
@@ -86,6 +95,20 @@ export const BRAND_TARGETS = [
   "steam",
   "discord",
   "roblox",
+  "yahoo",
+  "fedex",
+  "dhl",
+  "usps",
+  "ups",
+  "walmart",
+  "target",
+  "irs",
+  "telegram",
+  "snapchat",
+  "zoom",
+  "stripe",
+  "square",
+  "shopify",
 ];
 
 export const SUSPICIOUS_HOSTNAME_KEYWORDS = [
@@ -96,6 +119,8 @@ export const SUSPICIOUS_HOSTNAME_KEYWORDS = [
   "security",
   "secure",
   "account",
+  "accounts",
+  "review",
   "update",
   "authenticate",
   "auth",
@@ -109,6 +134,8 @@ export const SUSPICIOUS_HOSTNAME_KEYWORDS = [
   "banking",
   "passcode",
   "payment",
+  "claim",
+  "bonus",
 ];
 
 export const COMMONLY_ABUSED_TLDS = new Set([
