@@ -1,11 +1,11 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('QRGuard User Journeys', () => {
+test.describe('Trinetra User Journeys', () => {
   test('Journey 1: Analyze link and inspect security findings', async ({ page }) => {
     await page.goto('/');
 
     // Check title and tagline
-    await expect(page).toHaveTitle(/QRGuard — Think Before You Scan/i);
+    await expect(page).toHaveTitle(/Trinetra — Think Before You Scan/i);
     await expect(page.getByText('Check before you trust.')).toBeVisible();
 
     // Check input field
@@ -30,7 +30,7 @@ test.describe('QRGuard User Journeys', () => {
     // Test Continue to Website triggers security warning modal
     await page.getByRole('button', { name: /Continue to Website/i }).click();
     await expect(page.getByRole('dialog')).toBeVisible();
-    await expect(page.getByText(/You Are Leaving QRGuard/i)).toBeVisible();
+    await expect(page.getByText(/You Are Leaving Trinetra/i)).toBeVisible();
     await page.getByRole('button', { name: /Cancel & Stay Safe/i }).click();
     await expect(page.getByRole('dialog')).not.toBeVisible();
 
@@ -57,7 +57,7 @@ test.describe('QRGuard User Journeys', () => {
 
   test('Journey 3: Educational Security Guide and How It Works pages', async ({ page }) => {
     await page.goto('/how-it-works');
-    await expect(page.getByRole('heading', { level: 1, name: /How QRGuard Works/i })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: /How Trinetra Works/i })).toBeVisible();
     await expect(page.getByText(/14-Point Heuristic Rule Engine/i)).toBeVisible();
 
     await page.goto('/security-guide');
@@ -66,7 +66,7 @@ test.describe('QRGuard User Journeys', () => {
     await expect(page.getByText(/Physical Parking Meter & Payment Sticker Fraud/i)).toBeVisible();
 
     await page.goto('/about');
-    await expect(page.getByRole('heading', { level: 1, name: /About QRGuard/i })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: /About Trinetra/i })).toBeVisible();
     await expect(page.getByText(/Explicit Security Limitations & Disclaimers/i)).toBeVisible();
   });
 });

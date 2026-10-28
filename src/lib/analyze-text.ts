@@ -50,7 +50,7 @@ export function classifyQRContent(rawText: string): QRClassification {
       raw: trimmed,
       title: "Wi-Fi Network Configuration",
       description:
-        "This QR code configures a Wi-Fi connection. QRGuard does not automatically connect to Wi-Fi networks.",
+        "This QR code configures a Wi-Fi connection. Trinetra does not automatically connect to Wi-Fi networks.",
       parsedDetails,
       isWebUrl: false,
       securityNote:
@@ -86,7 +86,7 @@ export function classifyQRContent(rawText: string): QRClassification {
       raw: trimmed,
       title: "Contact Card (vCard)",
       description:
-        "This QR code contains contact information. QRGuard does not automatically import or dial contacts.",
+        "This QR code contains contact information. Trinetra does not automatically import or dial contacts.",
       parsedDetails,
       isWebUrl: false,
       securityNote:
@@ -122,7 +122,7 @@ export function classifyQRContent(rawText: string): QRClassification {
       raw: trimmed,
       title: "Email Action",
       description:
-        "This QR code initiates an email. QRGuard does not automatically send emails or open your mail client.",
+        "This QR code initiates an email. Trinetra does not automatically send emails or open your mail client.",
       parsedDetails,
       isWebUrl: false,
       securityNote:
@@ -138,7 +138,7 @@ export function classifyQRContent(rawText: string): QRClassification {
       raw: trimmed,
       title: "Telephone Number",
       description:
-        "This QR code contains a telephone number. QRGuard will not automatically dial.",
+        "This QR code contains a telephone number. Trinetra will not automatically dial.",
       parsedDetails: { "Phone Number": number },
       isWebUrl: false,
       securityNote:
@@ -156,7 +156,7 @@ export function classifyQRContent(rawText: string): QRClassification {
       raw: trimmed,
       title: "SMS Message",
       description:
-        "This QR code drafts a text message. QRGuard will not send messages automatically.",
+        "This QR code drafts a text message. Trinetra will not send messages automatically.",
       parsedDetails: { Recipient: recipient },
       isWebUrl: false,
       securityNote:

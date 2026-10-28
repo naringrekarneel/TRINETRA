@@ -15,7 +15,7 @@ const ElementNumberContext = createContext<ElementNumberContextType>({
 export const ElementNumberProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [showNumbers, setShowNumbers] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem('qrguard-show-numbers');
+      const stored = localStorage.getItem('trinetra-show-numbers') || localStorage.getItem('qrguard-show-numbers');
       if (stored !== null) return stored === 'true';
     }
     // Default to true as requested by the user
@@ -24,7 +24,7 @@ export const ElementNumberProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     try {
-      localStorage.setItem('qrguard-show-numbers', String(showNumbers));
+      localStorage.setItem('trinetra-show-numbers', String(showNumbers));
     } catch {
       // ignore
     }

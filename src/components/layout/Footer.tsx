@@ -20,7 +20,7 @@ export const Footer: React.FC = () => {
               </h3>
               <p className="mt-1 text-xs text-slate-600 dark:text-slate-300">
                 QR decoding happens in your browser. Your image is not uploaded
-                by QRGuard. No camera frames, uploaded pictures, or inspected
+                by Trinetra. No camera frames, uploaded pictures, or inspected
                 URLs are stored on any remote server.
               </p>
             </div>
@@ -36,7 +36,7 @@ export const Footer: React.FC = () => {
                 <Shield className="h-4 w-4" aria-hidden="true" />
               </div>
               <span className="font-bold text-base text-slate-900 dark:text-white">
-                QRGuard
+                Trinetra
               </span>
             </div>
             <p className="mt-2 text-sm text-slate-600 dark:text-slate-400 max-w-sm">
@@ -104,7 +104,7 @@ export const Footer: React.FC = () => {
             <ul className="mt-3 space-y-2 text-sm">
               <li>
                 <a
-                  href="https://github.com/placeholder-org/qrguard"
+                  href="https://github.com/placeholder-org/trinetra"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 text-slate-600 hover:text-forest-700 dark:text-slate-400 dark:hover:text-forest-400 transition-colors"
@@ -130,7 +130,7 @@ export const Footer: React.FC = () => {
         <div className="relative mt-8 pt-8 border-t border-slate-200 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-4">
           <NumBadge id={51} />
           <p>
-            &copy; {new Date().getFullYear()} QRGuard Contributors. Released
+            &copy; {new Date().getFullYear()} Trinetra Contributors. Released
             under the MIT License.
           </p>
           <p className="text-center sm:text-right text-[11px] text-slate-500 max-w-md">

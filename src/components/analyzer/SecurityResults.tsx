@@ -397,7 +397,7 @@ export const SecurityResults: React.FC<SecurityResultsProps> = ({
                     id="confirm-modal-title"
                     className="text-base font-bold text-slate-900 dark:text-white"
                   >
-                    You Are Leaving QRGuard
+                    You Are Leaving Trinetra
                   </h3>
                   <p className="text-xs text-slate-500 dark:text-slate-400">
                     Caution: Potential risks flagged

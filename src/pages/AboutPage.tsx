@@ -19,7 +19,7 @@ export const AboutPage: React.FC = () => {
           <span>Open Source Security Project</span>
         </div>
         <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-          About QRGuard
+          About Trinetra
         </h1>
         <p className="mt-3 text-base text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
           An open-source, privacy-first cybersecurity utility designed to
@@ -65,7 +65,7 @@ export const AboutPage: React.FC = () => {
             No Third-Party APIs
           </h2>
           <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-            No API keys, mandatory accounts, or subscription paywalls. QRGuard
+            No API keys, mandatory accounts, or subscription paywalls. Trinetra
             functions completely standalone as a static application deployable
             anywhere.
           </p>
@@ -86,13 +86,13 @@ export const AboutPage: React.FC = () => {
           </h2>
         </div>
         <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
-          While QRGuard detects numerous common phishing and evasion tactics,
+          While Trinetra detects numerous common phishing and evasion tactics,
           users must understand the boundaries of client-side heuristic
           inspection:
         </p>
         <ul className="list-disc pl-5 text-xs text-slate-700 dark:text-slate-300 space-y-2">
           <li>
-            <strong>Heuristics &ne; Malware Sandbox:</strong> QRGuard does not
+            <strong>Heuristics &ne; Malware Sandbox:</strong> Trinetra does not
             download or execute remote web page HTML, JavaScript, or payloads.
             It cannot check if a destination site has drive-by downloads or
             zero-day exploits.
@@ -118,7 +118,7 @@ export const AboutPage: React.FC = () => {
             Open Source Transparency &amp; Third-Party Libraries
           </h2>
           <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
-            QRGuard is released under the permissive{" "}
+            Trinetra is released under the permissive{" "}
             <strong>MIT License</strong>. We believe in minimal dependencies and
             vetted open-source libraries:
           </p>
@@ -169,7 +169,7 @@ export const AboutPage: React.FC = () => {
             repository on GitHub.
           </div>
           <a
-            href="https://github.com/placeholder-org/qrguard"
+            href="https://github.com/placeholder-org/trinetra"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2"

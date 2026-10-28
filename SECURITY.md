@@ -8,7 +8,7 @@
 
 ## Reporting a Vulnerability
 
-The QRGuard team takes the security of this project seriously. If you discover a security vulnerability or security-relevant issue in QRGuard, please do not file a public issue on GitHub.
+The Trinetra team takes the security of this project seriously. If you discover a security vulnerability or security-relevant issue in Trinetra, please do not file a public issue on GitHub.
 
 Instead, please report vulnerabilities by contacting the project maintainers:
 - **Email:** security@example.com *(replace with official contact)*
@@ -25,16 +25,16 @@ We will acknowledge receipt within 48 hours and work towards a prompt disclosure
 
 ## Architecture & Privacy Model
 
-QRGuard is built strictly according to privacy-preserving and secure-by-design principles:
+Trinetra is built strictly according to privacy-preserving and secure-by-design principles:
 
 1. **Client-Side QR Decoding:** Camera streams and uploaded QR code images are decoded entirely inside the client's browser using HTML5 Canvas / WASM. No image frames or raw files are uploaded to any server.
 2. **Zero Default External Network Requests:** The URL security engine is entirely deterministic and runs locally. URLs entered or scanned are never broadcast, logged, or sent to third-party reputation trackers unless explicitly initiated or configured.
-3. **No Automatic Navigation:** QRGuard never automatically navigates to decoded links, nor does it automatically dial numbers or join Wi-Fi networks.
+3. **No Automatic Navigation:** Trinetra never automatically navigates to decoded links, nor does it automatically dial numbers or join Wi-Fi networks.
 4. **No Arbitrary Code Execution:** Decoded input is treated strictly as plain text or parsed through the standard Web `URL` constructor. Input is never evaluated as HTML or scripts.
 
 ## Heuristic Security Engine Limitations
 
-QRGuard's URL analyzer operates through deterministic heuristic inspection of URL structure, Public Suffix List boundaries, syntax, homoglyphs, and known suspicious patterns.
+Trinetra's URL analyzer operates through deterministic heuristic inspection of URL structure, Public Suffix List boundaries, syntax, homoglyphs, and known suspicious patterns.
 
 **Important Notice:**
 - A finding or heuristic warning is **not proof** that a website is malicious.

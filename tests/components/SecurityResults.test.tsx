@@ -90,7 +90,7 @@ describe('SecurityResults component', () => {
 
     // Modal dialog must be visible
     expect(screen.getByRole('dialog')).toBeInTheDocument();
-    expect(screen.getByText(/You Are Leaving QRGuard/i)).toBeInTheDocument();
+    expect(screen.getByText(/You Are Leaving Trinetra/i)).toBeInTheDocument();
     expect(openMock).not.toHaveBeenCalled();
 
     // Confirm navigation inside modal

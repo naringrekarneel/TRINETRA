@@ -7,7 +7,7 @@ export const HowItWorksPage: React.FC = () => {
       {/* Title */}
       <section className="text-center">
         <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-          How QRGuard Works
+          How Trinetra Works
         </h1>
         <p className="mt-3 text-base text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
           An inside look at our client-side analysis pipeline, Public Suffix
@@ -82,7 +82,7 @@ export const HowItWorksPage: React.FC = () => {
             .
           </p>
           <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-            QRGuard uses the official Mozilla Public Suffix List via{" "}
+            Trinetra uses the official Mozilla Public Suffix List via{" "}
             <code className="font-mono text-xs text-forest-700 dark:text-forest-400">
               tldts
             </code>{" "}
@@ -246,7 +246,7 @@ export const HowItWorksPage: React.FC = () => {
           <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
             Many security apps show arbitrary numbers like &quot;98% Safe&quot;.
             We reject fake security scores. If no heuristic flags are found,
-            QRGuard states clearly:{" "}
+            Trinetra states clearly:{" "}
             <em>&quot;No heuristic warnings detected.&quot;</em> It never claims
             a site is 100% safe, because attackers can always spin up brand-new
             domains or host phishing on legitimate clouds.
@@ -269,7 +269,7 @@ export const HowItWorksPage: React.FC = () => {
             </div>
           </div>
           <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-            QRGuard never automatically opens links. If you choose to continue
+            Trinetra never automatically opens links. If you choose to continue
             to a website, it opens in a new tab with{" "}
             <code className="font-mono text-xs bg-slate-100 dark:bg-charcoal-800 px-1 py-0.5 rounded">
               rel=&quot;noopener noreferrer&quot;

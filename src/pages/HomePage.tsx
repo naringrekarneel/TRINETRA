@@ -80,7 +80,7 @@ export const HomePage: React.FC = () => {
             : [],
           limitations: [
             "Non-web QR content is classified client-side for safe inspection.",
-            "QRGuard does not execute actions, dial numbers, or connect to networks.",
+            "Trinetra does not execute actions, dial numbers, or connect to networks.",
           ],
           analyzedAt: new Date().toISOString(),
           qrClassification,

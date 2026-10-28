@@ -161,7 +161,7 @@ export const SecurityGuidePage: React.FC = () => {
             <code className="font-mono text-xs bg-slate-100 dark:bg-charcoal-800 px-1 py-0.5 rounded">
               attacker.test
             </code>
-            . This is why QRGuard flags embedded credentials as high risk.
+            . This is why Trinetra flags embedded credentials as high risk.
           </p>
         </section>
 
@@ -201,7 +201,7 @@ export const SecurityGuidePage: React.FC = () => {
             <code className="font-mono text-xs bg-slate-100 dark:bg-charcoal-800 px-1 py-0.5 rounded">
               аpple.com
             </code>
-            . QRGuard decodes Punycode and inspects each character for
+            . Trinetra decodes Punycode and inspects each character for
             confusable homoglyphs.
           </p>
         </section>
@@ -271,7 +271,7 @@ export const SecurityGuidePage: React.FC = () => {
             </li>
           </ul>
           <p className="mt-3 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-            QRGuard empowers you to understand the structural signals and
+            Trinetra empowers you to understand the structural signals and
             mechanics of links so you can make informed decisions. When in
             doubt, search for the official organization directly rather than
             following links from untrusted physical stickers.

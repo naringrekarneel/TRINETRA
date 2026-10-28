@@ -1,6 +1,6 @@
-# Contributing to QRGuard
+# Contributing to Trinetra
 
-Thank you for your interest in contributing to **QRGuard — Think Before You Scan**! We welcome community contributions to improve security heuristics, accessibility, UI/UX, and testing.
+Thank you for your interest in contributing to **Trinetra — Think Before You Scan**! We welcome community contributions to improve security heuristics, accessibility, UI/UX, and testing.
 
 ## Table of Contents
 1. [Development Environment Setup](#development-environment-setup)
@@ -20,8 +20,8 @@ Ensure you have:
 
 ```bash
 # Clone the repository
-git clone https://github.com/placeholder-org/qrguard.git
-cd qrguard
+git clone https://github.com/placeholder-org/trinetra.git
+cd trinetra
 
 # Install dependencies
 npm install
@@ -37,7 +37,7 @@ Visit `http://localhost:5173` in your browser.
 ## Project Architecture
 
 ```
-qrguard/
+trinetra/
 ├── src/
 │   ├── components/
 │   │   ├── analyzer/       # Link input, URL details, findings, warning cards

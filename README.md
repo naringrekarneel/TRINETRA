@@ -1,6 +1,6 @@
-# QRGuard — Think Before You Scan
+# Trinetra — Think Before You Scan
 
-[![CI](https://github.com/placeholder-org/qrguard/actions/workflows/ci.yml/badge.svg)](https://github.com/placeholder-org/qrguard/actions)
+[![CI](https://github.com/placeholder-org/trinetra/actions/workflows/ci.yml/badge.svg)](https://github.com/placeholder-org/trinetra/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-forest.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Strict-blue.svg)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-6.x-646CFF.svg)](https://vitejs.dev/)
@@ -34,7 +34,7 @@ QR codes have become ubiquitous across restaurant menus, public parking meters, 
 
 Attackers physically paste deceptive QR stickers over legitimate parking meters, embed credentials before hostnames, register typosquatted domains, and hide destinations behind multi-level subdomains or URL shorteners.
 
-**QRGuard** solves this by offering an instant, zero-upload inspection workflow that explains potential risks in plain language **before** you visit the website.
+**Trinetra** solves this by offering an instant, zero-upload inspection workflow that explains potential risks in plain language **before** you visit the website.
 
 ---
 
@@ -53,18 +53,18 @@ Attackers physically paste deceptive QR stickers over legitimate parking meters,
 
 ## Privacy Architecture
 
-Privacy is not an afterthought in QRGuard; it is a core design constraint:
+Privacy is not an afterthought in Trinetra; it is a core design constraint:
 
 1. **100% In-Browser Decoding**: Camera streams and uploaded images are processed entirely inside the client browser using HTML5 Canvas and WebAssembly. **No image is ever uploaded to any server.**
 2. **Zero Default Telemetry**: No third-party analytics, tracking scripts, or error loggers capture the links you inspect.
-3. **No Database / No Accounts**: QRGuard requires no accounts, passwords, or payment info.
+3. **No Database / No Accounts**: Trinetra requires no accounts, passwords, or payment info.
 4. **No External API Keys**: Core functionality requires no third-party reputation lookups or external API tokens.
 
 ---
 
 ## Heuristic Detection Engine (14 Rules)
 
-QRGuard executes 14 modular, explainable security rules against every parsed web link:
+Trinetra executes 14 modular, explainable security rules against every parsed web link:
 
 | # | Rule Identifier | Severity | Threat Explained |
 |---|-----------------|----------|------------------|
@@ -85,7 +85,7 @@ QRGuard executes 14 modular, explainable security rules against every parsed web
 
 ### Public Suffix List Integration
 
-QRGuard strictly avoids naive substring checks like `hostname.includes("paypal.com")`. Instead, it uses Mozilla's **Public Suffix List** (via `tldts`) to accurately delineate registrable domains from multi-part public suffixes like `.co.uk`, `.gov.uk`, or `.github.io`.
+Trinetra strictly avoids naive substring checks like `hostname.includes("paypal.com")`. Instead, it uses Mozilla's **Public Suffix List** (via `tldts`) to accurately delineate registrable domains from multi-part public suffixes like `.co.uk`, `.gov.uk`, or `.github.io`.
 
 ---
 
@@ -106,14 +106,14 @@ QRGuard strictly avoids naive substring checks like `hostname.includes("paypal.c
 ## Project Structure
 
 ```
-qrguard/
+trinetra/
 ├── .github/
 │   └── workflows/
 │       └── ci.yml               # Automated CI pipeline
 ├── e2e/
 │   └── qrguard.spec.ts          # Playwright end-to-end tests
 ├── public/
-│   ├── favicon.svg              # Shield and QR brand icon
+│   ├── favicon.svg              # SVG shield & QR brand icon
 │   └── robots.txt               # Web crawler instructions
 ├── src/
 │   ├── components/
@@ -188,8 +188,8 @@ qrguard/
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/placeholder-org/qrguard.git
-cd qrguard
+git clone https://github.com/placeholder-org/trinetra.git
+cd trinetra
 
 # 2. Install dependencies
 npm install
@@ -204,7 +204,7 @@ Visit `http://localhost:5173` in your browser.
 
 ## Automated Testing
 
-QRGuard features an extensive test suite covering unit heuristics, domain parsing, component interactions, and browser end-to-end flows:
+Trinetra features an extensive test suite covering unit heuristics, domain parsing, component interactions, and browser end-to-end flows:
 
 ```bash
 # Run all unit and component tests (Vitest)
@@ -227,7 +227,7 @@ npm run test:e2e
 
 ## Deployment (Vercel)
 
-QRGuard is configured for zero-configuration static deployment on Vercel:
+Trinetra is configured for zero-configuration static deployment on Vercel:
 
 1. **Output Directory**: `dist`
 2. **Build Command**: `npm run build`
@@ -249,7 +249,7 @@ vercel
 ## Heuristic Limitations & Disclaimers
 
 > [!IMPORTANT]
-> - **Heuristics are not an antivirus or live malware sandbox.** QRGuard inspects URL syntax and structural anomalies. It does not fetch remote HTML payloads, download files, or execute live JavaScript.
+> - **Heuristics are not an antivirus or live malware sandbox.** Trinetra inspects URL syntax and structural anomalies. It does not fetch remote HTML payloads, download files, or execute live JavaScript.
 > - **Clean checks are not an endorsement of absolute safety.** Attackers can host malicious credential harvesting forms on legitimate cloud providers or newly registered domains without triggering structural heuristics.
 > - Always exercise critical thinking (**"Think Before You Scan"**) before entering sensitive information on any external website.
 

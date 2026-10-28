@@ -32,14 +32,14 @@ export const Header: React.FC = () => {
             <Link
               to="/"
               className="flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-600 rounded-md p-1"
-              aria-label="QRGuard Home"
+              aria-label="Trinetra Home"
             >
               <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-forest-800 text-white dark:bg-forest-600">
                 <Shield className="h-5 w-5" aria-hidden="true" />
               </div>
               <div>
                 <span className="text-lg font-bold tracking-tight text-slate-900 dark:text-white">
-                  QRGuard
+                  Trinetra
                 </span>
                 <span className="relative hidden sm:inline-block ml-2 text-xs font-medium text-slate-500 dark:text-slate-400">
                   <NumBadge id={2} inline />
@@ -112,7 +112,7 @@ export const Header: React.FC = () => {
             <div className="relative">
               <NumBadge id={8} />
               <a
-                href="https://github.com/placeholder-org/qrguard"
+                href="https://github.com/placeholder-org/trinetra"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-lg text-slate-500 hover:text-slate-700 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-charcoal-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-600 transition-colors"

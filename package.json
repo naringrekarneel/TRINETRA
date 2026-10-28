@@ -1,7 +1,7 @@
 {
-  "name": "qrguard",
+  "name": "trinetra",
   "version": "1.0.0",
-  "description": "Think Before You Scan — Client-side QR code scanner and URL security analyzer",
+  "description": "Trinetra: Think Before You Scan — Client-side QR code scanner and URL security analyzer",
   "private": true,
   "type": "module",
   "license": "MIT",

@@ -5,7 +5,7 @@ export type Theme = "light" | "dark";
 export function useTheme() {
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window !== "undefined") {
-      const stored = localStorage.getItem("qrguard-theme") as Theme | null;
+      const stored = (localStorage.getItem("trinetra-theme") || localStorage.getItem("qrguard-theme")) as Theme | null;
       if (stored === "light" || stored === "dark") return stored;
       if (window.matchMedia("(prefers-color-scheme: dark)").matches)
         return "dark";
@@ -21,7 +21,7 @@ export function useTheme() {
       root.classList.remove("dark");
     }
     try {
-      localStorage.setItem("qrguard-theme", theme);
+      localStorage.setItem("trinetra-theme", theme);
     } catch {
       // ignore
     }
