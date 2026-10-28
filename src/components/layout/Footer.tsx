@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Eye, Lock, EyeOff, FileText, Github } from "lucide-react";
+import { Eye, Lock, EyeOff, FileText, Github, CheckCircle2, ShieldCheck } from "lucide-react";
 import { NumBadge } from "../../context/ElementNumberContext";
 
 export const Footer: React.FC = () => {
@@ -29,7 +29,7 @@ export const Footer: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand Info (#48) */}
-          <div className="relative md:col-span-2">
+          <div className="relative">
             <NumBadge id={48} />
             <div className="flex items-center gap-2">
               <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-forest-800 text-white dark:bg-forest-600 shadow-sm">
@@ -39,18 +39,44 @@ export const Footer: React.FC = () => {
                 Trinetra
               </span>
             </div>
-            <p className="mt-2 text-sm text-slate-600 dark:text-slate-400 max-w-sm">
+            <p className="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
               Think Before You Scan. Inspect web links and QR codes before
               opening destinations to guard against phishing, malicious
               redirects, and credential theft.
             </p>
             <div className="mt-4 flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
               <Lock
-                className="h-3.5 w-3.5 text-forest-600"
+                className="h-3.5 w-3.5 text-forest-600 shrink-0"
                 aria-hidden="true"
               />
               <span>Free &amp; Open Source Software (MIT License)</span>
             </div>
+          </div>
+
+          {/* Security Standards (#49 - Fills space between #48 and #50) */}
+          <div className="relative">
+            <NumBadge id={49} />
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-900 dark:text-slate-200">
+              Security Standards
+            </h4>
+            <ul className="mt-3 space-y-2.5 text-sm text-slate-600 dark:text-slate-400">
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-forest-600 dark:text-forest-400 shrink-0" aria-hidden="true" />
+                <span>14-Rule Heuristic Engine</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-forest-600 dark:text-forest-400 shrink-0" aria-hidden="true" />
+                <span>100% Client-Side Processing</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-forest-600 dark:text-forest-400 shrink-0" aria-hidden="true" />
+                <span>Zero Server Uploads &amp; No Logs</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-forest-600 dark:text-forest-400 shrink-0" aria-hidden="true" />
+                <span>Public Suffix Domain Boundaries</span>
+              </li>
+            </ul>
           </div>
 
           {/* Legal / Limitations (#50) */}
@@ -59,7 +85,7 @@ export const Footer: React.FC = () => {
             <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-900 dark:text-slate-200">
               Transparency
             </h4>
-            <ul className="mt-3 space-y-2 text-sm">
+            <ul className="mt-3 space-y-2.5 text-sm">
               <li>
                 <a
                   href="https://github.com/placeholder-org/trinetra"
@@ -78,6 +104,15 @@ export const Footer: React.FC = () => {
                 >
                   <FileText className="h-3.5 w-3.5" aria-hidden="true" />
                   Security Limitations
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/security-guide"
+                  className="inline-flex items-center gap-1.5 text-slate-600 hover:text-forest-700 dark:text-slate-400 dark:hover:text-forest-400 transition-colors"
+                >
+                  <ShieldCheck className="h-3.5 w-3.5" aria-hidden="true" />
+                  Quishing &amp; Phishing Guide
                 </Link>
               </li>
             </ul>
